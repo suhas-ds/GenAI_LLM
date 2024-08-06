@@ -1,0 +1,17 @@
+streamlit==1.37.0
+PyPDF2
+#pdfminer
+pdfminer.six
+langchain==0.2.12
+langchain-community==0.2.11
+huggingface_hub==0.23.5
+sentence_transformers==3.0.1
+faiss-cpu==1.8.0.post1
+unstructured #==0.15.0
+chromadb==0.5.5
+Cython==3.0.10
+#tiktoken==0.7.0
+unstructured[local-inference]
+groq==0.9.0
+pillow-heif
+matplotlib
