@@ -1,8 +1,11 @@
 # src/streamlit_app.py
 # from huggingface_hub import login
 # login()
+
 import streamlit as st
 import os
+import warnings
+warnings.filterwarnings('ignore')
 from src.text_utils import wrap_text_preserve_newlines
 from src.pdf_loader import load_pdfs_from_folder
 from src.index_creator import create_index
