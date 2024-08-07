@@ -6,13 +6,19 @@ import streamlit as st
 import os
 import warnings
 warnings.filterwarnings('ignore')
-from src.text_utils import wrap_text_preserve_newlines
+from src.text_utils import wrap_text_preserve_newlines, clean_response
 from src.pdf_loader import load_pdfs_from_folder
 from src.index_creator import create_index
 from src.qa_chain import create_qa_chain
 
 # Streamlit UI
-st.title("Question Answering with PDFs")
+st.title("Question Answering with PDFs 📄")
+with st.expander("About the App"):
+    st.markdown(
+        """
+        This is a Generative AI powered Question and Answering app that responds to questions about your PDF File.
+        """
+    )
 
 pdf_folder_path = 'data/pdfs/'
 
@@ -41,39 +47,11 @@ else:
     if st.button("Get Answer"):
         if question:
             answer = chain.run(question)
-            wrapped_answer = wrap_text_preserve_newlines(answer)
+            # wrapped_answer = wrap_text_preserve_newlines(answer)
+            clean_answer = clean_response(answer)
+            st.write("### Question:")
+            st.write(question)
             st.write("### Answer:")
-            st.write(wrapped_answer)
+            st.write(clean_answer)
         else:
             st.write("Please enter a question.")
-
-
-# import streamlit as st
-# import os
-# from src.text_utils import wrap_text_preserve_newlines
-# from src.pdf_loader import load_pdfs_from_folder
-# from src.index_creator import create_index
-# from src.qa_chain import create_qa_chain
-
-# # Streamlit UI
-# st.title("Question Answering with PDFs")
-
-# pdf_folder_path = 'data/'
-
-# if not os.path.exists(pdf_folder_path):
-#     st.write(f"Directory '{pdf_folder_path}' not found.")
-# else:
-#     loaders = load_pdfs_from_folder(pdf_folder_path)
-#     index = create_index(loaders)
-#     chain = create_qa_chain(index)
-
-#     question = st.text_input("Enter your question:")
-
-#     if st.button("Get Answer"):
-#         if question:
-#             answer = chain.run(question)
-#             wrapped_answer = wrap_text_preserve_newlines(answer)
-#             st.write("### Answer:")
-#             st.write(wrapped_answer)
-#         else:
-#             st.write("Please enter a question.")
